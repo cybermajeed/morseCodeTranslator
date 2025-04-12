@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Morse Code Translator</title>
+    <style>
+      body {
+        background: #1d1d1d;
+        color: #fff;
+        padding: 0;
+        margin: auto;
+      }
+      .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        gap: 3px;
+        font-size: x-large;
+        font-family: calibri;
+      }
+      .wrapper div {
+        width: 100%;
+        height: 90vh;
+        padding: 5px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 5px;
+      }
+      .morsePanel {
+        background: #334;
+      }
+      .textPanel {
+        background: #223;
+      }
+      .wrapper div textarea {
+        margin-top: 10px;
+        padding: 5px 10px;
+        font-size: larger;
+        width: calc(100% - 20px);
+        resize: none;
+        outline: none;
+        background: none;
+        color: #fff;
+        height: calc(100% - 10px);
+        border-radius: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="morsePanel">
+        Morse Code
+        <textarea
+          id="morseTextArea"
+          placeholder="Enter Morse Code Here..."
+        ></textarea>
+      </div>
+      <div class="textPanel">
+        Text
+        <textarea id="textTextArea" placeholder="Enter Text Here..."></textarea>
+      </div>
+    </div>
+    <div class="toolBar">tools</div>
+    <script>
+      let morseTextArea = document.getElementById("morseTextArea");
+      let textTextArea = document.getElementById("textTextArea");
+
+      const table = [
+        ".-", //A
+        "-...", //B
+        "-.-.", //C
+        "-..", //D
+        ".", // E
+        "..-.", //F
+        "--.", //G
+        "....", //H
+        "..", //I
+        ".---", //J
+        "-.-", //K
+        ".-..", //L
+        "--", //M
+        "-.", //N
+        "---", //O
+        ".--.", //P
+        "--.-", //Q
+        ".-.", //R
+        "...", //S
+        "-", //T
+        "..-", //U
+        "...-", //V
+        ".--", //W
+        "-..-", //X
+        "-.--", //Y
+        "--..", //Z
+        "/",
+      ];
+
+      function morseToText(val) {
+        let valArr = val.split(" ");
+        let text = "";
+        for (const i of valArr) {
+          if (table.indexOf(i) != -1) {
+            if (i == "/") {
+              text += " ";
+            } else {
+              text += String.fromCharCode(table.indexOf(i) + 65);
+            }
+          }
+        }
+        textTextArea.value = text;
+      }
+      function textToText(val) {
+        alert(val);
+      }
+
+      //oninput
+      morseTextArea.oninput = () => {
+        morseToText(morseTextArea.value);
+      };
+      textTextArea.onkeyup = (e) => {
+        textToText(textTextArea.value);
+      };
+    </script>
+  </body>
+</html>
