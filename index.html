@@ -63,7 +63,7 @@
         <textarea id="textTextArea" placeholder="Enter Text Here..."></textarea>
       </div>
     </div>
-    <div class="toolBar">tools</div>
+    <div class="toolBar"></div>
     <script>
       let morseTextArea = document.getElementById("morseTextArea");
       let textTextArea = document.getElementById("textTextArea");
@@ -112,16 +112,24 @@
         }
         textTextArea.value = text;
       }
-      function textToText(val) {
-        alert(val);
+      function textToMorse(val) {
+        let morse = "";
+        for (const i of val) {
+          if (i == " ") {
+            morse += "/ ";
+          } else {
+            morse += table[i.charCodeAt(0) - 65] + " ";
+          }
+        }
+        morseTextArea.value = morse;
       }
 
       //oninput
       morseTextArea.oninput = () => {
         morseToText(morseTextArea.value);
       };
-      textTextArea.onkeyup = (e) => {
-        textToText(textTextArea.value);
+      textTextArea.oninput = () => {
+        textToMorse(textTextArea.value.toUpperCase());
       };
     </script>
   </body>
